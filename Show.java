@@ -17,8 +17,8 @@ public class Show extends Event{
         return performers;
     }
 
-    public Show(String name, String description, LocalDateTime startTime, LocalDateTime endTime, ArrayList<Performer> performers) {
+    public Show(String name, String description, LocalDateTime startTime, LocalDateTime endTime) {
         super(name, description, startTime, endTime);
-        this.performers = performers;
+        this.performers = new ArrayList<>();
     }
 }
