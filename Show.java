@@ -9,12 +9,12 @@ public class Show extends Event{
         return null;
     }
 
-    public void setPerformers(ArrayList<Performer> performers) {
-        this.performers = performers;
+    public void addPerformer(Performer performer) {
+        this.performers.add(performer);
     }
 
     public ArrayList<Performer> getPerformers() {
-        return performers;
+        return new ArrayList<>(this.performers);
     }
 
     public Show(String name, String description, LocalDateTime startTime, LocalDateTime endTime) {

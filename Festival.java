@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Festival {
@@ -16,10 +17,14 @@ public class Festival {
     }
 
     public ArrayList<FestivalRun> getFestivalRuns() {
-        return festivalRuns;
+        return this.festivalRuns;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addFestivalRun(String place, LocalDateTime date){
+        this.festivalRuns.add(new FestivalRun(place, date, this));
     }
 }

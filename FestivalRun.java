@@ -1,3 +1,4 @@
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -8,12 +9,17 @@ public class FestivalRun {
     private ArrayList<Organizer> organizers;
     private Festival festival;
 
-    public FestivalRun(String place, LocalDateTime date, Festival festival) {
+    public FestivalRun(String place, LocalDateTime date) {
         this.place = place;
         this.date = date;
-        this.festival = festival;
         this.organizers = new ArrayList<>();
         this.events = new ArrayList<>();
+        this.festival = null;
+    }
+
+    public FestivalRun(String place, LocalDateTime date, Festival festival) {
+        this(place, date);
+        this.festival = festival;
     }
 
     public void addOrganizer(Organizer organizer){
@@ -22,6 +28,10 @@ public class FestivalRun {
 
     public void addEvent(Event event){
         this.events.add(event);
+        for (Organizer organizer :
+                this.organizers) {
+            organizer.pushNotification(this.festival, event);
+        }
     }
 
     public void removeOrganizer(Organizer organizer){
@@ -37,7 +47,7 @@ public class FestivalRun {
     }
 
     public ArrayList<Event> getEvents() {
-        return events;
+        return this.events;
     }
 
     public String getPlace() {
@@ -49,7 +59,7 @@ public class FestivalRun {
     }
 
     public ArrayList<Organizer> getOrganizers() {
-        return organizers;
+        return this.organizers;
     }
 
     public Festival getFestival() {
@@ -62,5 +72,20 @@ public class FestivalRun {
 
     public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public void setFestival(Festival festival) {
+        if (this.festival != null){
+            this.festival = festival;
+        }
+    }
+
+    public Duration getDuration(){
+        Duration myDuration = Duration.ZERO;
+        for (Event event :
+                this.events) {
+            myDuration = myDuration.plus(event.getDuration());
+        }
+        return myDuration;
     }
 }
