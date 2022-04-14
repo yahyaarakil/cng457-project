@@ -29,7 +29,12 @@ public class FestivalRun {
     }
 
     public void addEvent(Event event){
-        this.events.add(event);
+        int i;
+        for (i = 0;
+             i < this.events.size()
+                     && this.events.get(i).getStartTime().isBefore(event.getStartTime());
+             i++);
+        this.events.add(i, event);
         for (Organizer organizer :
                 this.organizers) {
             organizer.pushNotification(this.festival, event);

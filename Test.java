@@ -35,6 +35,14 @@ public class Test {
 
         // Creating Events
         festivals.get(0).getFestivalRuns().get(0).addEvent(
+                new Show(
+                        "Folk Dancing Show",
+                        "Popular folk dancers in Güzelyurt",
+                        LocalDateTime.parse("2019-06-26 20:00", formatter),
+                        LocalDateTime.parse("2019-06-26 21:00", formatter)
+                )
+        );
+        festivals.get(0).getFestivalRuns().get(0).addEvent(
                 new Concert(
                         "Opening Concert",
                         "Kick off with a popular pop singer",
@@ -43,30 +51,12 @@ public class Test {
                         performers.get(0)
                 )
         );
-        festivals.get(0).getFestivalRuns().get(0).addEvent(
-                new Show(
-                        "Folk Dancing Show",
-                        "Popular folk dancers in Güzelyurt",
-                        LocalDateTime.parse("2019-06-26 20:00", formatter),
-                        LocalDateTime.parse("2019-06-26 21:00", formatter)
-                )
-        );
         ((Show)festivals.get(0).getFestivalRuns().get(0).getEvents().get(1)).addPerformer(performers.get(1));
         ((Show)festivals.get(0).getFestivalRuns().get(0).getEvents().get(1)).addPerformer(performers.get(2));
         ((Show)festivals.get(0).getFestivalRuns().get(0).getEvents().get(1)).addPerformer(performers.get(3));
         ((Show)festivals.get(0).getFestivalRuns().get(0).getEvents().get(1)).addPerformer(performers.get(4));
 
-
-        festivals.get(1).getFestivalRuns().get(0).addEvent(
-                new OtherActivity(
-                        "Walking to see Tulips",
-                        "2-hours walk as a group",
-                        LocalDateTime.parse("2019-03-24 10:00", formatter),
-                        LocalDateTime.parse("2019-03-24 12:00", formatter)
-                )
-        );
-
-
+        // adding festivals out of order to test event chronological sorting
         festivals.get(1).getFestivalRuns().get(0).addEvent(
                 new Concert(
                         "Opening Concert",
@@ -74,6 +64,14 @@ public class Test {
                         LocalDateTime.parse("2019-03-24 10:00", formatter),
                         LocalDateTime.parse("2019-03-24 12:00", formatter),
                         performers.get(5)
+                )
+        );
+        festivals.get(1).getFestivalRuns().get(0).addEvent(
+                new OtherActivity(
+                        "Walking to see Tulips",
+                        "2-hours walk as a group",
+                        LocalDateTime.parse("2019-03-24 10:00", formatter),
+                        LocalDateTime.parse("2019-03-24 12:00", formatter)
                 )
         );
 
