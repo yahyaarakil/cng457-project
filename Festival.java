@@ -24,7 +24,7 @@ public class Festival {
         this.name = name;
     }
 
-    public void addFestivalRun(String place, LocalDateTime date){
-        this.festivalRuns.add(new FestivalRun(place, date, this));
+    public void addFestivalRun(String place, LocalDateTime date, int durationDays){
+        this.festivalRuns.add(new FestivalRun(place, date, durationDays, this));
     }
 }

@@ -6,7 +6,12 @@ public class Show extends Event{
 
     @Override
     public String getEventSpecificDetails() {
-        return null;
+        String sD = "Performers: ";
+        for (Performer performer :
+                this.performers) {
+            sD += performer.getFirstName() + " " + performer.getSurname() + ", ";
+        }
+        return sD.substring(0, sD.length()-2);
     }
 
     public void addPerformer(Performer performer) {

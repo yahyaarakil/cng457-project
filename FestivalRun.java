@@ -8,17 +8,19 @@ public class FestivalRun {
     private LocalDateTime date;
     private ArrayList<Organizer> organizers;
     private Festival festival;
+    private int durationDays;
 
-    public FestivalRun(String place, LocalDateTime date) {
+    public FestivalRun(String place, LocalDateTime date, int durationDays) {
         this.place = place;
         this.date = date;
         this.organizers = new ArrayList<>();
         this.events = new ArrayList<>();
         this.festival = null;
+        this.durationDays = durationDays;
     }
 
-    public FestivalRun(String place, LocalDateTime date, Festival festival) {
-        this(place, date);
+    public FestivalRun(String place, LocalDateTime date, int durationDays, Festival festival) {
+        this(place, date, durationDays);
         this.festival = festival;
     }
 
@@ -43,7 +45,23 @@ public class FestivalRun {
     }
 
     public String generateProgram(EventDetailsStrategy strategy){
-        return null;
+        String program = "";
+        program += "Name: " + this.festival.getName();
+        program += ", Place: " + this.getPlace();
+        program += ", Date: " + this.getDate();
+        program += ", Duration: " + this.durationDays + " Days\nOrganizers: \n";
+        int index = 1;
+        for (Organizer organizer :
+                this.organizers) {
+            program += index++ + ". " + organizer.getFirstName() + " " + organizer.getSurname() + "\n";
+        }
+        program += "Events:\n";
+        index = 1;
+        for (Event event :
+                this.events) {
+            program += index++ + ". " + strategy.getInfo(event) + "\n";
+        }
+        return program;
     }
 
     public ArrayList<Event> getEvents() {

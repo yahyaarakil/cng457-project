@@ -5,7 +5,7 @@ public class Concert extends Event{
 
     @Override
     public String getEventSpecificDetails() {
-        return null;
+        return "Performer: " + this.getPerformer().getFirstName() + " " + this.getPerformer().getSurname();
     }
 
     public void setPerformer(Performer performer) {

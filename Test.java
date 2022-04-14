@@ -1,6 +1,7 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 // LocalDateTime.parse("yyyy-MM-dd HH:mm");
 public class Test {
@@ -13,8 +14,8 @@ public class Test {
         festivals.add(new Festival("Tepebasi Tulip Festival"));
 
         // Creating Festival Runs
-        festivals.get(0).addFestivalRun("Guzelyurt", LocalDateTime.parse("2019-06-25 00:00", formatter));
-        festivals.get(1).addFestivalRun("Tepbasi", LocalDateTime.parse("2019-03-24 00:00", formatter));
+        festivals.get(0).addFestivalRun("Guzelyurt", LocalDateTime.parse("2019-06-25 00:00", formatter), 15);
+        festivals.get(1).addFestivalRun("Tepbasi", LocalDateTime.parse("2019-03-24 00:00", formatter), 5);
         
         // Creating Organizers
         festivals.get(0).getFestivalRuns().get(0).addOrganizer(new Organizer("Mete", "Kaan"));
@@ -75,5 +76,26 @@ public class Test {
                         performers.get(5)
                 )
         );
+
+        // Instantiating strategies
+        ArrayList<EventDetailsStrategy> strategies = new ArrayList<>();
+        strategies.add(new Version1EventDetails());
+        strategies.add(new Version2EventDetails());
+        strategies.add(new Version3EventDetails());
+
+        while(true){
+            System.out.println("Please Enter details depth (1-3)");
+            Scanner inputScanner = new Scanner(System.in);
+            int strategyIndex = inputScanner.nextInt();
+            strategyIndex -= 1;
+
+            for (Festival festival :
+                    festivals) {
+                for (FestivalRun festivalRun :
+                        festival.getFestivalRuns()) {
+                    System.out.println(festivalRun.generateProgram(strategies.get(strategyIndex)));
+                }
+            }
+        }
     }
 }
